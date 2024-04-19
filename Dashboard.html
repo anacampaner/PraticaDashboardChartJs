@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body
+        {
+            display: flex;
+            background-color: #e4f2f7;
+            align-items: center;
+            flex-direction:column;
+            margin-top: 5%;
+        }
+
+        h1
+        {
+            color: #120a8f;
+        }
+
+        .dashboard
+        {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <h1>Área de monitoramento</h1>
+    <div class="dashboard">
+        <div>
+            <canvas id="graficoDeBarras" style="position: relative; width: 40dvw; height: 40dvh;"></canvas>
+        </div>
+        <div>
+            <canvas id="graficoDeLinhas" style="position: relative; width: 40dvw; height: 40dvh;"></canvas>
+        </div>
+    </div>
+    <script>
+        // Configuração dos dados para o gráfico de barras
+        const labelsBarra = ['Janeiro', 'Fevereiro', 'Março', 'Abril','Maio','Junho'];
+        const dataBarra = {
+            labels: labelsBarra,
+            datasets: [{
+                label: 'Temperatura',
+                data: [22,24,27,23,20,18],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Umidade',
+                data: [90,89,93,87,88,82], 
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const configBarra = {
+            type: 'bar',
+            data: dataBarra,
+            options: {
+                indexAxis: 'y'
+            }
+        };
+
+        const barras = new Chart(document.getElementById('graficoDeBarras'), configBarra);
+
+        // Configuração dos dados para o gráfico de linhas
+        const labels = ['12:00', '13:00', '14:00', '15:00','16:00','17:00'];
+        const data = {
+            labels: labels,
+            datasets: [{
+            label: 'Temperatura',
+            data: [30,29,28,25,22,23],
+            fill: false,
+            borderColor: 'rgb(255, 102, 204)',
+            tension: 0.1
+        },
+        {
+            label: 'Umidade',
+            data: [80,82,80,85,80,83],
+            fill: false,
+            borderColor: 'rgb(102, 178, 255)',
+            tension: 0.1
+        }
+            ]
+        };
+
+        const configLinha = {
+            type: 'line',
+            data: data,
+        };
+
+        const linhas = new Chart(document.getElementById('graficoDeLinhas'), configLinha);
+    </script>
+</body>
+</html>
